@@ -12,6 +12,7 @@ def check_loginStatus():
         else:
             login(info[0], info[1])
 
+
 #login function, passed as command to login button in run.py under mainmenu()
 def login(root, frame, user_name, pwd):    
 
@@ -44,7 +45,15 @@ def login(root, frame, user_name, pwd):
 
                 child_frame2 = CTkFrame(parent_frame, fg_color="#221a2e", border_color= "#9e59f7", border_width = 2, corner_radius= 10)
                 child_frame2.place(relx = 0.67, rely = 0.5 ,relwidth = 0.6, relheight = 0.85 ,anchor = CENTER)
+
+                # setting up a scrollframe inside the child frame2 that will hold the to do list
+                scroll_frame = CTkScrollableFrame(child_frame2, fg_color = "#16101D")
+                scroll_frame.place(relx = 0.5, rely = 0.45, relwidth= 0.9, relheight = 0.75, anchor = CENTER)
                 
+                # entry for entering the items in the list
+                list_entry = CTkEntry(child_frame2, placeholder_text="Enter task", height=35, corner_radius = 20)
+                list_entry.place(relx = 0.5, rely = 0.88,relwidth = 0.7, anchor = CENTER )
+
                 #--------------------------------buttons----------------------------------------
 
                 # logout button
@@ -57,7 +66,7 @@ def login(root, frame, user_name, pwd):
                 add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#006026", hover_color="#008836")
                 add_button.place(relx = 0.5, rely =0.77, anchor = CENTER)
 
-                #delete button
+                # delete button
                 delete_button_img = CTkImage(Image.open("images/delete_icon.png"), size = (40,40))
                 delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#7A0303", hover_color="#9E0000")
                 delete_button.place(relx = 0.5, rely = 0.9, anchor = CENTER)
@@ -67,6 +76,14 @@ def login(root, frame, user_name, pwd):
                 pwd.delete(0,END)
                 
     except:
-        #if no user is found
+        # if no user is found
         CTkMessagebox(icon = "cancel", title="Error!", message="No such username found!")
 
+#test
+# root = CTk()
+# root.geometry("500x500")
+
+# scrol = CTkScrollableFrame(root, height= 250, width=250)
+# scrol.place(relx = 0.5, rely = 0.5,anchor  = CENTER)
+
+# root.mainloop()
