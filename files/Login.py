@@ -1,6 +1,7 @@
 from PIL import Image
 from customtkinter import *
 from CTkMessagebox import CTkMessagebox
+#from Run import Mainmenu
 
 # function for checking whether there is already a user logged in
 def check_loginStatus():
@@ -14,7 +15,7 @@ def check_loginStatus():
 
 
 #login function, passed as command to login button in run.py under mainmenu()
-def login(root, frame, user_name, pwd):    
+def login(root, frame, user_name, pwd, mainmenu):    
 
     # The file opening function is placed under try block incase the given usrname does not exist
     try:
@@ -50,15 +51,19 @@ def login(root, frame, user_name, pwd):
                 scroll_frame = CTkScrollableFrame(child_frame2, fg_color = "#16101D")
                 scroll_frame.place(relx = 0.5, rely = 0.45, relwidth= 0.9, relheight = 0.75, anchor = CENTER)
                 
+                # task label
+                task_label = CTkLabel(child_frame2, text= "Task:", font= CTkFont(size = 14))
+                task_label.place(relx = 0.15, rely = 0.88, anchor = CENTER)
+
                 # entry for entering the items in the list
                 list_entry = CTkEntry(child_frame2, placeholder_text="Enter task", height=35, corner_radius = 20)
-                list_entry.place(relx = 0.5, rely = 0.88,relwidth = 0.7, anchor = CENTER )
+                list_entry.place(relx = 0.55, rely = 0.88,relwidth = 0.7, anchor = CENTER )
 
                 #--------------------------------buttons----------------------------------------
 
                 # logout button
                 logout_button_img = CTkImage(Image.open("images/logout_icon.png"), size=(40,40))
-                logout_button = CTkButton(child_frame1, text = "   Logout   ", image = logout_button_img, fg_color="#16111F",hover_color="#49484a", width =85, height = 40, font=CTkFont(size=14) )
+                logout_button = CTkButton(child_frame1, text = "   Logout   ", image = logout_button_img, fg_color="#16111F",hover_color="#49484a", width =85, height = 40, font=CTkFont(size=14), command = lambda : mainmenu(parent_frame) )  # calls mainmenu function
                 logout_button.place(relx = 0.5, rely = 0.2, anchor = CENTER)
 
                 # Add button
@@ -78,12 +83,3 @@ def login(root, frame, user_name, pwd):
     except:
         # if no user is found
         CTkMessagebox(icon = "cancel", title="Error!", message="No such username found!")
-
-#test
-# root = CTk()
-# root.geometry("500x500")
-
-# scrol = CTkScrollableFrame(root, height= 250, width=250)
-# scrol.place(relx = 0.5, rely = 0.5,anchor  = CENTER)
-
-# root.mainloop()

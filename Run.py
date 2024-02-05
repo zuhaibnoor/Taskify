@@ -55,7 +55,7 @@ def Mainmenu(frame=None):
 
 
     #buttons
-    login_button = CTkButton(signin_frame, text="Login",font = CTkFont(size =14),width = 200 , height=40,corner_radius=20, fg_color="#9e59f7", text_color="black", hover_color="#7330c9", command = lambda: Login.login(root, main_frame,username_entry, password_entry))
+    login_button = CTkButton(signin_frame, text="Login",font = CTkFont(size =14),width = 200 , height=40,corner_radius=20, fg_color="#9e59f7", text_color="black", hover_color="#7330c9", command = lambda: Login.login(root, main_frame,username_entry, password_entry, Mainmenu))
     login_button.place(relx=0.5,rely=0.65, anchor = CENTER)
 
     hr = CTkLabel(signin_frame,text="__________________________________________________",text_color="white")
