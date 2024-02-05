@@ -5,29 +5,36 @@ from CTkMessagebox import CTkMessagebox
 
 # function for checking whether there is already a user logged in
 def check_loginStatus():
-    with open("login_status.txt") as file:
-        info = file.read()
-        info = eval(info)
+    with open("files/login_status.txt") as file:
+        info = file.read()        
         if info == '':
             return 0
         else:
-            login(info[0], info[1])
+            info = eval(info)
+            return info[0], info[1]
 
+def logout(frame, mainmenu):
+    with open("files/login_status.txt", 'w') as f:
+        f.write('')
+    mainmenu(frame)
 
 #login function, passed as command to login button in run.py under mainmenu()
-def login(root, frame, user_name, pwd, mainmenu):    
+def login(root, user_name, pwd, mainmenu, frame = None):    
 
     # The file opening function is placed under try block incase the given usrname does not exist
     try:
-        with open(f"files/users/{user_name.get()}.txt") as file:
+        with open(f"files/users/{user_name}.txt") as file:
             file = file.read()
             file = eval(file)
 
-            if file[user_name.get()] == pwd.get():
+            if file[user_name] == pwd:
                 
-                username = str(user_name.get())
-                frame.destroy()
+                if frame != None:
+                    frame.destroy()
 
+                with open("files/login_status.txt", 'w') as f:
+                    f.write(str([user_name, pwd]))
+                print("hi")
                 #----------------------------------frames-----------------------------------------
                 #Setting up a new parent frame
                 parent_frame = CTkFrame(root)
@@ -41,7 +48,7 @@ def login(root, frame, user_name, pwd, mainmenu):
                 child_frame1 = CTkFrame(parent_frame, fg_color="#221a2e", border_color="#9e59f7", border_width=2, corner_radius=10)
                 child_frame1.place(relx = 0.18, rely = 0.5, relwidth = 0.3, relheight = 0.85, anchor = CENTER)
                 
-                username_label = CTkLabel(child_frame1, text = "Current User:\n" + username, font = CTkFont(size = 20))
+                username_label = CTkLabel(child_frame1, text = "Current User:\n" + user_name, font = CTkFont(size = 20))
                 username_label.place(relx = 0.5, rely = 0.08, anchor = CENTER)
 
                 child_frame2 = CTkFrame(parent_frame, fg_color="#221a2e", border_color= "#9e59f7", border_width = 2, corner_radius= 10)
@@ -63,7 +70,7 @@ def login(root, frame, user_name, pwd, mainmenu):
 
                 # logout button
                 logout_button_img = CTkImage(Image.open("images/logout_icon.png"), size=(40,40))
-                logout_button = CTkButton(child_frame1, text = "   Logout   ", image = logout_button_img, fg_color="#16111F",hover_color="#49484a", width =85, height = 40, font=CTkFont(size=14), command = lambda : mainmenu(parent_frame) )  # calls mainmenu function
+                logout_button = CTkButton(child_frame1, text = "   Logout   ", image = logout_button_img, fg_color="#16111F",hover_color="#49484a", width =85, height = 40, font=CTkFont(size=14), command = lambda : logout(parent_frame, mainmenu) )  # calls mainmenu function
                 logout_button.place(relx = 0.5, rely = 0.2, anchor = CENTER)
 
                 # Add button
@@ -78,7 +85,6 @@ def login(root, frame, user_name, pwd, mainmenu):
 
             else:
                 CTkMessagebox(icon = "cancel", title = "Error!", message="Incorrect password!")
-                pwd.delete(0,END)
                 
     except:
         # if no user is found
