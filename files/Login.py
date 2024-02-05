@@ -34,7 +34,7 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
                 with open("files/login_status.txt", 'w') as f:
                     f.write(str([user_name, pwd]))
-                print("hi")
+                
                 #----------------------------------frames-----------------------------------------
                 #Setting up a new parent frame
                 parent_frame = CTkFrame(root)
