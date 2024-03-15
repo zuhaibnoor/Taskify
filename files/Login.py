@@ -75,12 +75,12 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
                 # Add button
                 add_button_img = CTkImage(Image.open("images/add_icon.png"), size = (40,40))
-                add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#006026", hover_color="#008836")
+                add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#008836", hover_color="#006026")
                 add_button.place(relx = 0.5, rely =0.77, anchor = CENTER)
 
                 # delete button
                 delete_button_img = CTkImage(Image.open("images/delete_icon.png"), size = (40,40))
-                delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#7A0303", hover_color="#9E0000")
+                delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#9E0000", hover_color="#7A0303")
                 delete_button.place(relx = 0.5, rely = 0.9, anchor = CENTER)
 
             else:
