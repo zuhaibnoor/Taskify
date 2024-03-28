@@ -1,6 +1,7 @@
 from PIL import Image
 from customtkinter import *
 from CTkMessagebox import CTkMessagebox
+from files import Todo
 #from Run import Mainmenu
 
 # function for checking whether there is already a user logged in
@@ -75,7 +76,7 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
                 # Add button
                 add_button_img = CTkImage(Image.open("images/add_icon.png"), size = (40,40))
-                add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#008836", hover_color="#006026")
+                add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#008836", hover_color="#006026", command = lambda : Todo.add_task(scroll_frame,list_entry))
                 add_button.place(relx = 0.5, rely =0.77, anchor = CENTER)
 
                 # delete button
