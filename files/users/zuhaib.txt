@@ -1,1 +1,1 @@
-{'zuhaib': 'zuhaib'}
+{'zuhaib': 'zuhaib', 1: 'adwda', 2: 'dagjnj', 3: 'jyj', 4: 'jyj', 5: 'gyj', 6: 'jyj', 7: 'jyj', 8: 'yj', 9: 'lil', 10: 'il', 11: 'l', 12: 'ilgy', 13: 'urt', 14: 'yrtu', 15: 'yiit', 16: 'uyiy', 17: 'uiyu', 18: 'iyuiku', 19: 'awdawd', 20: 'wdawd'}

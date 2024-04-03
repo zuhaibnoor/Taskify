@@ -16,7 +16,7 @@ def signUp(root_win=None,frame=None, menu=None):
                 CTkMessagebox(message="The passwords do not match. Make sure the password and confirm password have same passwords.", title = "Error", icon = "cancel")
                 co_pwd.delete(0,END)
         else:    
-                try:
+                try:    
                         file = open(f"files/users/{username}.txt")
                         CTkMessagebox(message=f"The username \' {username} \' you entered is already taken. Try again with a different one.", title = "Error", icon = "cancel", button_color="#9e59f7", button_hover_color="#7330c9")
                 except:

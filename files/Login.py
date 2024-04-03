@@ -24,11 +24,11 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
     # The file opening function is placed under try block incase the given usrname does not exist
     try:
-        with open(f"files/users/{user_name}.txt") as file:
-            file = file.read()
-            file = eval(file)
-
-            if file[user_name] == pwd:
+            # file = open(f"files/users/{user_name}.txt", 'r+')     ############## debugging
+        with open(f"files/users/{user_name}.txt", 'r+') as file:     
+            user_info = file.read()
+            user_info = eval(user_info)
+            if user_info[user_name] == pwd:
                 
                 if frame != None:
                     frame.destroy()
@@ -59,6 +59,11 @@ def login(root, user_name, pwd, mainmenu, frame = None):
                 scroll_frame = CTkScrollableFrame(child_frame2, fg_color = "#16101D")
                 scroll_frame.place(relx = 0.5, rely = 0.45, relwidth= 0.9, relheight = 0.75, anchor = CENTER)
                 
+                #----------------Placing the existing notes/tasks in the scrollframe-----------------------
+                Todo.add_existing_tasks(scroll_frame, user_name)
+                #----------------Placing the existing notes/tasks in the scrollframe-----------------------
+
+
                 # task label
                 task_label = CTkLabel(child_frame2, text= "Task:", font= CTkFont(size = 14))
                 task_label.place(relx = 0.15, rely = 0.88, anchor = CENTER)
@@ -76,13 +81,14 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
                 # Add button
                 add_button_img = CTkImage(Image.open("images/add_icon.png"), size = (40,40))
-                add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#008836", hover_color="#006026", command = lambda : Todo.add_task(scroll_frame,list_entry))
+                add_button = CTkButton(child_frame1, text = "     Add    ", image = add_button_img, font=CTkFont(size=14), fg_color= "#008836", hover_color="#006026", command = lambda : Todo.add_task(scroll_frame,list_entry, user_name))
                 add_button.place(relx = 0.5, rely =0.77, anchor = CENTER)
 
                 # delete button
                 delete_button_img = CTkImage(Image.open("images/delete_icon.png"), size = (40,40))
                 delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#9E0000", hover_color="#7A0303")
                 delete_button.place(relx = 0.5, rely = 0.9, anchor = CENTER)
+
 
             else:
                 CTkMessagebox(icon = "cancel", title = "Error!", message="Incorrect password!")
