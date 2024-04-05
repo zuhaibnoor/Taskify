@@ -29,7 +29,7 @@ def login(root, user_name, pwd, mainmenu, frame = None):
             user_info = file.read()
             user_info = eval(user_info)
             if user_info[user_name] == pwd:
-                
+                # print(pwd) ######################debugging
                 if frame != None:
                     frame.destroy()
 

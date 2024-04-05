@@ -23,7 +23,7 @@ def signUp(root_win=None,frame=None, menu=None):
                         if name.get() == '' or pwd.get() == '' or co_pwd.get() == '':
                                CTkMessagebox(message="Error! Empty fields.", title = "Error", icon = "cancel",button_color="#9e59f7",button_hover_color="#7330c9" )
                         else:
-                                user_info = str({username:pswd})
+                                user_info = f'{{\'{username}\':\'{pswd}\',\'rows\':0}}'
                                 with open(f"files/users/{username}.txt","w") as user_file:
                                         user_file.write(user_info)
                                 CTkMessagebox(message=f"Your account with username '{username}' has been successully created.", title = "Signup Successful!", icon = "check",button_color="#9e59f7",button_hover_color= "#7330c9")    
