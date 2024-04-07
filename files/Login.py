@@ -46,23 +46,24 @@ def login(root, user_name, pwd, mainmenu, frame = None):
                 parent_frame_bg_label.place(relx = 0.5,rely = 0.5,relwidth = 1, relheight = 1, anchor = CENTER)
 
                 #setting 2 child frames inside the parent_frame containing the UI components and 2do list repectively
-                child_frame1 = CTkFrame(parent_frame, fg_color="#221a2e", border_color="#9e59f7", border_width=2, corner_radius=10)
+                child_frame1 = CTkFrame(parent_frame, fg_color="#221a2e", border_color="#9e59f7", border_width=1, corner_radius=10)
                 child_frame1.place(relx = 0.18, rely = 0.5, relwidth = 0.3, relheight = 0.85, anchor = CENTER)
                 
                 username_label = CTkLabel(child_frame1, text = "Current User:\n" + user_name, font = CTkFont(size = 20))
                 username_label.place(relx = 0.5, rely = 0.08, anchor = CENTER)
 
-                child_frame2 = CTkFrame(parent_frame, fg_color="#221a2e", border_color= "#9e59f7", border_width = 2, corner_radius= 10)
+                child_frame2 = CTkFrame(parent_frame, fg_color="#221a2e", border_color= "#9e59f7", border_width = 1, corner_radius= 10)
                 child_frame2.place(relx = 0.67, rely = 0.5 ,relwidth = 0.6, relheight = 0.85 ,anchor = CENTER)
 
                 # setting up a scrollframe inside the child frame2 that will hold the to do list
                 scroll_frame = CTkScrollableFrame(child_frame2, fg_color = "#16101D")
                 scroll_frame.place(relx = 0.5, rely = 0.45, relwidth= 0.9, relheight = 0.75, anchor = CENTER)
                 
+                print('ok1')
                 #----------------Placing the existing notes/tasks in the scrollframe-----------------------
                 Todo.add_existing_tasks(scroll_frame, user_name)
                 #----------------Placing the existing notes/tasks in the scrollframe-----------------------
-
+                print('ok2')
 
                 # task label
                 task_label = CTkLabel(child_frame2, text= "Task:", font= CTkFont(size = 14))
@@ -86,7 +87,7 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
                 # delete button
                 delete_button_img = CTkImage(Image.open("images/delete_icon.png"), size = (40,40))
-                delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#9E0000", hover_color="#7A0303")
+                delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#9E0000", hover_color="#7A0303", command = lambda : Todo.delete_task(scroll_frame,user_name))
                 delete_button.place(relx = 0.5, rely = 0.9, anchor = CENTER)
 
 

@@ -5,7 +5,7 @@ from files import SignUp, Login
 
 #setting up the root window
 root = CTk()
-root.geometry("900x650")
+root.geometry("900x650+0+100")
 root.resizable(False,False)
 root.title("2 DO")
 
