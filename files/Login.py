@@ -2,7 +2,7 @@ from PIL import Image
 from customtkinter import *
 from CTkMessagebox import CTkMessagebox
 from files import Todo
-#from Run import Mainmenu
+
 
 # function for checking whether there is already a user logged in
 def check_loginStatus():
@@ -24,12 +24,10 @@ def login(root, user_name, pwd, mainmenu, frame = None):
 
     # The file opening function is placed under try block incase the given usrname does not exist
     try:
-            # file = open(f"files/users/{user_name}.txt", 'r+')     ############## debugging
         with open(f"files/users/{user_name}.txt", 'r+') as file:     
             user_info = file.read()
             user_info = eval(user_info)
             if user_info[user_name] == pwd:
-                # print(pwd) ######################debugging
                 if frame != None:
                     frame.destroy()
 
@@ -59,11 +57,9 @@ def login(root, user_name, pwd, mainmenu, frame = None):
                 scroll_frame = CTkScrollableFrame(child_frame2, fg_color = "#16101D")
                 scroll_frame.place(relx = 0.5, rely = 0.45, relwidth= 0.9, relheight = 0.75, anchor = CENTER)
                 
-                print('ok1')
                 #----------------Placing the existing notes/tasks in the scrollframe-----------------------
                 Todo.add_existing_tasks(scroll_frame, user_name)
                 #----------------Placing the existing notes/tasks in the scrollframe-----------------------
-                print('ok2')
 
                 # task label
                 task_label = CTkLabel(child_frame2, text= "Task:", font= CTkFont(size = 14))
@@ -90,6 +86,10 @@ def login(root, user_name, pwd, mainmenu, frame = None):
                 delete_button = CTkButton(child_frame1, text = "   Delete   ", image = delete_button_img,font=CTkFont(size=14), fg_color="#9E0000", hover_color="#7A0303", command = lambda : Todo.delete_task(scroll_frame,user_name))
                 delete_button.place(relx = 0.5, rely = 0.9, anchor = CENTER)
 
+                # clear all button
+                clear_all_button_img = CTkImage(Image.open("images/delete_icon.png"), size = (20,20))
+                clear_all_button = CTkButton(child_frame2, text = 'Clear All', image = clear_all_button_img, hover_color="#49484a", command= lambda : Todo.clearAll(scroll_frame, user_name), anchor = "center",corner_radius=20)
+                clear_all_button.place(relx = 0.7, rely = 0.93)
 
             else:
                 CTkMessagebox(icon = "cancel", title = "Error!", message="Incorrect password!")
@@ -97,3 +97,24 @@ def login(root, user_name, pwd, mainmenu, frame = None):
     except:
         # if no user is found
         CTkMessagebox(icon = "cancel", title="Error!", message="No such username found!")
+
+
+# root = CTk()
+
+# # setting the dimensions of the window and the coordinates at which it should appear
+# root.geometry("900x650+0+100")
+
+# # disabling the resizing option on top of the window
+# root.resizable(False,False)
+
+# # title of the application
+# root.title("2 DO")
+
+# # theme
+# set_appearance_mode("dark")
+
+# clear_all_button_img = CTkImage(Image.open('images/delete_icon.png'), size = (20,20))
+# print("image OK")
+# clear_all_button = CTkButton(root, text = 'Clear All', img = clear_all_button_img, hover_color="#49484a", command= lambda : Todo.clearAll(root, 'ok'))
+# print("obj OK")
+# clear_all_button.place(relx = 0.8, rely = 0.9)
